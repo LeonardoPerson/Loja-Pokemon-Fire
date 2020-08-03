@@ -9,6 +9,7 @@ Essa é a tela inicial do projeto com os pokémon e seus respectivos valores, um
 <img src="public/tela.png" /> <br/><br/>
 
 Abaixo constam os produtos no carrinho com botão para remoção e no final um botão para finalizar a compra. 
+Na parte superior o valor total é calculado. 
 
 <img src="public/carrinho.png" />
 
