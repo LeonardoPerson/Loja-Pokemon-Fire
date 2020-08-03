@@ -1,13 +1,241 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html{
+  font-size: 62.5%; /*Igual a 10px. Padrão é 16px, que é igual a 100%*/
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  font: 1.6rem Helvetica; /*Equivale a 16px - rem 
+  no restante do código é relativo a essa medida*/
+  height: 100vh;
+  margin: 0rem;
+
 }
+#root{
+  height: 100%;
+}
+/*Definindo as regiões da tela ----------------------------------------*/
+.grid-container{
+  display: grid;
+  grid-template-areas: 
+  "header"
+  "main"
+  "footer";
+  grid-template-columns: 1fr; /*fr é uma fração do total, nesse caso, 100%*. Comumente utilizado em grid*/
+  grid-template-rows: 8rem 1fr 8rem;
+  height: 100%;  
+}
+
+.main-tela{
+  display: grid;
+  grid-template-areas: 
+  "main-search main-carrinho"
+  "main-pokemon main-carrinho";
+  grid-template-columns: 5fr 1fr; /*fr é uma fração do total, nesse caso, 100%*. Comumente utilizado em grid*/
+  grid-template-rows: 10rem 1fr;  
+}
+
+@media (max-width: 500px){
+  .main-tela{
+    display: flex;
+    flex-direction: column; 
+    padding-top: 1rem;  
+  }
+  .main-carrinho{
+    border-top: 1px solid rgb(97, 104, 112);
+  }
+}
+
+/*Campo de busca--------------------------------------------------------*/
+.main-search{
+  grid-area: main-search;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;   
+  
+ }
+ .search-input{ 
+  height: 3rem;
+  border: rgb(91, 104, 105) solid 1.5px;
+  width: 80%;  
+}
+
+/*Área principal com exibição de pokémon ------------------------------*/
+
+.main{
+  grid-area: main; 
+}
+
+.main-pokemon {
+  grid-area: main-pokemon;  
+}
+
+.pokemons{
+  display: flex;
+  justify-content: center; /*Alinhamento horizontal*/
+  align-items: center; /*Alinhamento vertical*/
+  flex-wrap: wrap;   
+ 
+}
+
+.pokemon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 1rem;
+}
+.pokemons div:hover{
+  background-color: rgb(200, 207, 175);
+  transition: 0.5s;
+  border-radius: 1rem;
+}
+
+.pokemon-carregando{
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(61, 150, 161);  
+}
+
+.lista-compras{
+  display: flex;
+  list-style-type: none;
+  flex: 0 1 25rem; /*grow (adaptação ao container) shrink(redução do item ficando menor que seu tamanho) basis*/
+  margin: 1rem;
+  height: 27rem;  
+  background-color: rgb(235, 236, 166);
+  border-radius: 1rem;
+  justify-content: center;
+}
+
+.pokemon-name{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.pokemon-brand{
+  font-size: 1.2rem;
+  color: #1b1b1b;
+  font-weight: bold;
+}
+
+.pokemon-price{
+  color: rgb(47, 47, 47);
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+/*Carrinho -----------------------------------------------------------*/
+
+.main-carrinho{
+  grid-area: main-carrinho; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  
+  padding: 5rem;   
+  border-left: 1px solid rgb(132, 143, 156);
+  background-color:rgb(200, 207, 175);
+}
+
+.agradecimento{
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1rem;
+  color: #333333;
+}
+
+.total{
+  color: #383838;
+  font-weight: bold; 
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.titulo-carrinho{
+  color: #383838;
+  font-size: 2.5rem;
+  font-family: fantasy;
+  font-weight: 100;
+}
+
+
+/*Botões-----------------------------------------------------------------*/
+
+.button{
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: .5rem;
+  background-color: rgb(45, 151, 141);
+  color: white;
+  font-size: 11px;
+}
+.button-finalizar{
+  border-top: 1.5px solid rgb(21, 47, 47);
+  width: max-content;
+  padding: 1.5rem;
+}
+
+.search-button{
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: rgb(18, 158, 144);
+  color: white;
+}
+
+.button:hover{
+  background-color: rgb(30, 133, 122);
+  transition: 0.4s;
+}
+
+.button.primary{
+  background-color: rgb(18, 158, 144);
+  color: white;
+}
+
+/*-----------------------------------------------------------------------*/
+
+.header{
+  grid-area: header;
+  background-color: rgb(119, 0, 46);
+  color: rgb(237, 255, 132);
+  display: flex;
+  justify-content: left;
+  align-items: center; /*Alinhamento vertical*/  
+  font-size: 3rem;
+  font-family: fantasy;
+  font-style: italic;
+  padding-left: 12rem;
+}
+
+.footer{
+  grid-area: footer;
+  background-color: rgb(119, 0, 46);
+  color:  rgb(190, 255, 70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
