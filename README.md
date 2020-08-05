@@ -11,7 +11,6 @@ Só existem Pokémon do tipo fire nessa loja.
 
 Abaixo constam os produtos no carrinho com botão para remoção e no final um botão para finalizar a compra. 
 Na parte superior o valor total é calculado. Após clicar em finalizar, um agradecimento é exibido. <br/>
-Ob.: A api retorna em alguns momentos pokémon sem imagem. 
 
 <img src="public/carrinho.png" /><img src="public/agradecimento.png" />
 
