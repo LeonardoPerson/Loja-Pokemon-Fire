@@ -1,10 +1,11 @@
 import React from 'react';
+import {Poke} from './HomeScreen';
 //Definindo um valor para o preço de cada pokémon 
 //pois o array oriundo da Api não tem essa informação
 const price = 75;
 
 //Função que renderiza o conjunto de pokémon na tela, assim como os itens do carrinho
-const Product = (props: { product: any; children: any; }) => {
+const Product = (props: { product: Poke; children: any; }) => {
     const { product, children } = props;
     
     return (                  
