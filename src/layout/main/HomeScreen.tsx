@@ -1,4 +1,4 @@
-import React, {useState, useEffect, ChangeEvent} from 'react';
+import React, {useState, useEffect, useContext, ChangeEvent} from 'react';
 import {baseURL} from '../../Api';
 import Product from './Product';
 
@@ -24,7 +24,9 @@ export interface Poke {
 }
 
 //------------------------------------------------------------------------  
-function HomeScreen(){          
+function HomeScreen(){    
+   
+   
     //recebe o array inicial
     const [pokemon, setPokemon] = useState<Array<Poke>>([]); 
     //Autoriza a exibição de pokémon na tela
@@ -51,7 +53,7 @@ function HomeScreen(){
                     if(allpokemon.types[0].type.name === tipoPokemon){                  
                     listaAuxiliar.push(allpokemon);  
                     }       
-                });                               
+                }).catch(err => err.text);                               
                 setPokemon(listaAuxiliar);  
                 setSearchResults(listaAuxiliar);  
                 setTimeout(() => {
@@ -107,6 +109,7 @@ function HomeScreen(){
     return (
         <div className="main-tela"> 
         {/*Campo de busca-------------------------------------------------*/}
+            
             <div className="main-search">
                 <form className="search">
                     <input                    
@@ -118,6 +121,8 @@ function HomeScreen(){
                         />                    
                 </form>        
             </div>
+                
+             
             
             {/*Renderização de produtos pokémon conforme importação de Product-------------------------------------------------*/}
             <div className="main-pokemon">
@@ -133,7 +138,8 @@ function HomeScreen(){
                         ))                                           
                 }     
                 </div>              
-            </div>           
+            </div>  
+           
 
              {/*Renderização do carrinho conforme importação do Product -------------------------------------------------*/}
             <div className="main-carrinho">

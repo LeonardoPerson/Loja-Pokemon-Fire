@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header(){
     return (
-        <header className="header">
+        <div className="header">
             <div className="brand">            
                 Loja Pokémon Fire       
             </div>
@@ -10,7 +10,7 @@ function Header(){
             <div className="header-links">
                 <a href="cart.html">Carrinho</a>
             </div>  */}          
-        </header>     
+        </div>     
     )
 }
 

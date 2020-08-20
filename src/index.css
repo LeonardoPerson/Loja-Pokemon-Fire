@@ -32,6 +32,7 @@ body{
   "main-pokemon main-carrinho";
   grid-template-columns: 5fr 1fr; /*fr é uma fração do total, nesse caso, 100%*. Comumente utilizado em grid*/
   grid-template-rows: 10rem 1fr;  
+  height: 100%;
 }
 
 @media (max-width: 500px){
@@ -43,6 +44,15 @@ body{
   .main-carrinho{
     border-top: 1px solid rgb(97, 104, 112);
   }
+
+ .brand{
+   font-size: 2.3rem;
+   margin-left: 18%;
+   display: flex;
+   flex-wrap: nowrap;
+  
+ }
+ 
 }
 
 /*Campo de busca--------------------------------------------------------*/
@@ -214,12 +224,15 @@ body{
   background-color: rgb(119, 0, 46);
   color: rgb(237, 255, 132);
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center; /*Alinhamento vertical*/  
   font-size: 3rem;
   font-family: fantasy;
-  font-style: italic;
-  padding-left: 12rem;
+  font-style: italic;  
+}
+
+.brand{
+  margin-right: 20%;
 }
 
 .footer{
