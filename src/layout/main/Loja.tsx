@@ -1,13 +1,10 @@
-import React, {useState, useEffect, useContext, ChangeEvent} from 'react';
-import {baseURL} from '../../Api';
+import React, {useState, useEffect, ChangeEvent} from 'react';
 import Product from './Product';
+import Api from '../../Api';
 
-//------------------------------------------------------------------------
-//Define o tipo de pokémon, pode ser alterado para outros tipos
-//e o retorno ocorrerá normalmente
-const tipoPokemon = "fire";
+///////////////////////////////////////////////////////////////////////////////
 
-//Especificando o tipo do array de pokémon na função HomeScreen,
+//Especificando o tipo do array de pokémon na função Loja,
 //conforme exigência do typescript
 export interface Poke {
     id: string;
@@ -23,50 +20,33 @@ export interface Poke {
     }]
 }
 
-//------------------------------------------------------------------------  
-function HomeScreen(){    
-   
-   
-    //recebe o array inicial
-    const [pokemon, setPokemon] = useState<Array<Poke>>([]); 
+//////////////////////////////////////////////////////////////////////////////// 
+const Loja = () => {   
+    //Abastecimento da loja com produtos/pokémon
+    const [pokemon] = Api();
     //Autoriza a exibição de pokémon na tela
     const [loadingApi, setloadingApi] = useState(true); 
     //Valor digitado no campo de busca
     const [searchTerm, setSearchTerm] = useState(""); 
-    //recebe também o array inicial mas tem a condição de somente apresentar na tela o que for digitado na busca
+    //Recebe também o array inicial mas tem a condição de somente apresentar na tela o que for digitado na busca
     const [searchResults, setSearchResults] = useState<Array<Poke>>([]); 
-    //Array utilizado no carrinho de compras para adicionar, somar e iterar os itens de compra
+    //Array utilizado no carrinho de compras
     const [cart, setCart] = useState<Array<Poke>>([]);  
     //Flag que informa se o botão para finalizar foi clicado
     const [final, setFinal] = useState(false);
-    //Variável auxiliar para armazenar inicialmente o array da Api
-    const listaAuxiliar: Array<Poke> = [];    
-    
-    //Extraindo a baseURL da api e armazenando em variáveis
-    useEffect(() => {
-        fetch(baseURL)
-            .then((response) => response.json())
-            .then((data) => data.results.map((item: Response) => {                
-                fetch(item.url)
-                .then((response) => response.json())
-                .then((allpokemon) => {    
-                    if(allpokemon.types[0].type.name === tipoPokemon){                  
-                    listaAuxiliar.push(allpokemon);  
-                    }       
-                }).catch(err => err.text);                               
-                setPokemon(listaAuxiliar);  
-                setSearchResults(listaAuxiliar);  
-                setTimeout(() => {
-                    setloadingApi(false);
-                    }, 5000);                 
-            })
-            );           
-    }, []);  
+    //Variável auxiliar para armazenar inicialmente o array da Api  
+
+    useEffect(()=>{
+        setTimeout(() => {
+            setSearchResults(pokemon)
+            setloadingApi(false);
+        }, 5000);        
+    }, [])   
 
     //Capturando a palavra digitada no campo de busca e armazenado-a em searchTerm
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);        
-    };
+    }
 
     //Atualização de pokemon a cada valor de searchTerm, que é a palavra digitada
     useEffect(() => {        
@@ -81,7 +61,7 @@ function HomeScreen(){
     const addToCart = (index: number) => {
         setFinal(false);      
         setCart(cart.concat(searchResults[index]));        
-      }; 
+      }
 
     //Removendo elementos do carrinho
     const removeToCart = (index: number) => {     
@@ -103,12 +83,12 @@ function HomeScreen(){
       //Calculando o valor total no carrinho
     const calculatePrice = () => {
         return cart.reduce((price, product) => price + product.price, 0);
-    };   
+    }
        
     //---------------------------------------------------------------------
     return (
         <div className="main-tela"> 
-        {/*Campo de busca-------------------------------------------------*/}
+        {/*Campo de busca------------------------------------------------------------------------*/}
             
             <div className="main-search">
                 <form className="search">
@@ -120,11 +100,9 @@ function HomeScreen(){
                         type="search" 
                         />                    
                 </form>        
-            </div>
-                
-             
+            </div>            
             
-            {/*Renderização de produtos pokémon conforme importação de Product-------------------------------------------------*/}
+            {/*Produtos------------------------------------------------------------------------------*/}
             <div className="main-pokemon">
                 <div className="pokemons">
                 {
@@ -141,7 +119,7 @@ function HomeScreen(){
             </div>  
            
 
-             {/*Renderização do carrinho conforme importação do Product -------------------------------------------------*/}
+             {/*Carrinho ------------------------------------------------------------------------------------*/}
             <div className="main-carrinho">
                 <h3 className="titulo-carrinho">CARRINHO</h3>                   
                 <div className="total">Total: R${calculatePrice()}</div>                    
@@ -160,4 +138,4 @@ function HomeScreen(){
     )
 }
 
-export default HomeScreen;
+export default Loja;
